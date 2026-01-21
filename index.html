@@ -103,7 +103,6 @@
     <header>
         <nav>
             <a href="#" class="logo">PERI<span>GRAND</span></a>
-           
         </nav>
     </header>
 
@@ -201,23 +200,36 @@
     </div>
 
     <script>
-        const masters = ["aksana", "ayjamal", "ayjan", "barchin", "firuza", "kunduz", "maryam", "nurkiz", "nurzat", "perizat", "umida"];
+        // Masterlar ro'yxati va ularning aniq ish tajribalari
+        const mastersData = [
+            { name: "aksana", exp: "5-6" },
+            { name: "ayjamal", exp: "8-9" },
+            { name: "ayjan", exp: "3" },
+            { name: "barchin", exp: "3" },
+            { name: "firuza", exp: "5-6" },
+            { name: "kunduz", exp: "5-6" },
+            { name: "maryam", exp: "3" },
+            { name: "nurkiz", exp: "3" },
+            { name: "nurzat", exp: "1" },
+            { name: "nurjan", exp: "5-6" },
+            { name: "umida", exp: "8-9" }
+        ];
+
         const mList = document.getElementById('mList');
 
-        masters.forEach((name) => {
-            const exp = Math.floor(Math.random() * (8 - 5 + 1)) + 5; // Стаж от 5 до 8 лет
+        mastersData.forEach((master) => {
             mList.innerHTML += `
-                <div class="master-card" onclick="openM('${name}', '5 - 8')">
-                    <img src="img/${name}.png" alt="${name}" onerror="this.src='https://via.placeholder.com/200x250?text=${name}'">
-                    <h3>${name}</h3>
-                    <span>Опыт: 5 - 8 лет</span>
+                <div class="master-card" onclick="openM('${master.name}', '${master.exp}')">
+                    <img src="img/${master.name}.png" alt="${master.name}" onerror="this.src='https://via.placeholder.com/200x250?text=${master.name}'">
+                    <h3>${master.name}</h3>
+                    <span>Опыт: ${master.exp} ${master.exp === "1" ? "год" : "лет"}</span>
                 </div>
             `;
         });
 
         function openM(n, e) {
             document.getElementById('modName').innerText = n;
-            document.getElementById('modExp').innerText = `Стаж работы: ${e} лет`;
+            document.getElementById('modExp').innerText = `Стаж работы: ${e} ${e === "1" ? "год" : "лет"}`;
             document.getElementById('modImg').src = `img/${n}.png`;
             document.getElementById('mModal').style.display = 'flex';
         }
