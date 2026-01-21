@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PERI GRAND style | Салон красоты</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #FF8C00;
+            --dark: #1a1a1a;
+            --light: #ffffff;
+            --grey: #f4f4f4;
+            --text: #333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--light); color: var(--text); overflow-x: hidden; }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed; top: 0; width: 100%; background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px); z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        nav {
+            max-width: 1200px; margin: 0 auto; padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--dark); text-decoration: none; font-weight: 700; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+            url('./img/banner3.jpg') center/cover;
+            display: flex; align-items: center; justify-content: center; text-align: center; color: white;
+        }
+        .hero-h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 10px; }
+        .hero-p { font-size: 1.1rem; margin-bottom: 30px; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* --- COMMON --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 80px 20px; }
+        .section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 40px; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- MASTERS --- */
+        .masters-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        @media (min-width: 768px) { .masters-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); } }
+        .master-card { background: var(--grey); border-radius: 12px; overflow: hidden; text-align: center; cursor: pointer; padding-bottom: 15px; transition: 0.3s; }
+        .master-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .master-card img { width: 100%; height: 220px; object-fit: cover; }
+        .master-card h3 { font-size: 1rem; margin: 10px 0 5px; text-transform: capitalize; }
+        .master-card span { font-size: 0.75rem; color: #666; font-weight: 600; }
+
+        /* --- ABOUT --- */
+        .about-box { display: flex; flex-wrap: wrap; align-items: center; gap: 30px; background: var(--grey); border-radius: 20px; overflow: hidden; }
+        .about-img { flex: 1; min-width: 300px; height: 400px; }
+        .about-img img { width: 100%; height: 100%; object-fit: cover; }
+        .about-text { flex: 1; min-width: 300px; padding: 40px; }
+        .about-text h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 20px; }
+
+        /* --- CONTACTS --- */
+        .contact-card { background: var(--dark); color: white; padding: 40px; border-radius: 20px; text-align: center; }
+        .btn-group { display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 30px; }
+        @media (min-width: 768px) { .btn-group { grid-template-columns: 1fr 1fr; } }
+        .btn { padding: 18px; border-radius: 10px; text-decoration: none; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
+        .btn-wa { background: #d38525; color: white; }
+        .btn-call { background: #007AFF; color: white; }
+        .btn-insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+        .btn-2gis { background: #60AF14; color: white; }
+        .full-btn { grid-column: span 1; }
+        @media (min-width: 768px) { .full-btn { grid-column: span 2; } }
+
+        /* --- FOOTER IMPROVED --- */
+        footer { background: #111; color: #fff; padding: 60px 0 20px 0; }
+        .footer-content { 
+            max-width: 1200px; margin: 0 auto; padding: 0 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;
+        }
+        .footer-section h4 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 20px; color: var(--accent); }
+        .footer-section p, .footer-section a { color: #bbb; text-decoration: none; font-size: 0.9rem; margin-bottom: 10px; display: block; line-height: 1.6; }
+        .footer-section a:hover { color: var(--accent); }
+        .social-icons { display: flex; gap: 15px; margin-top: 15px; }
+        .social-icons img { width: 24px; filter: invert(1); opacity: 0.7; transition: 0.3s; }
+        .social-icons img:hover { opacity: 1; transform: scale(1.1); }
+        .footer-bottom { 
+            text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid #222; 
+            color: #555; font-size: 0.8rem; letter-spacing: 1px;
+        }
+
+        /* --- MODAL --- */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+        .modal-content { background: white; padding: 30px; border-radius: 20px; width: 100%; max-width: 400px; text-align: center; position: relative; }
+        .close { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#" class="logo">PERI<span>GRAND</span></a>
+           
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="reveal active">
+            <h1 class="hero-h1">PERI GRAND style</h1>
+            <p class="hero-p">Ваша красота в надежных руках</p>
+            <a href="https://wa.me/996703172737" class="btn btn-wa" style="display:inline-flex; width: 220px;">Записаться сейчас</a>
+        </div>
+    </section>
+
+    <section class="container reveal" id="masters">
+        <h2 class="section-title">Наши мастера</h2>
+        <div class="masters-grid" id="mList"></div>
+    </section>
+
+    <section class="container reveal" id="about">
+        <div class="about-box">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?q=80&w=1000" alt="Наш салон">
+            </div>
+            <div class="about-text">
+                <h2>Наше пространство</h2>
+                <p>Добро пожаловать в <b>PERI GRAND</b>. Мы создали уютное место в ТЦ “Аламидин Гранд”, где профессионализм встречается с комфортом.</p>
+                <br>
+                <p>Наши мастера используют только лучшие материалы, чтобы ваш стиль был безупречен каждый день. Мы ценим каждого клиента.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container reveal" id="services" style="background: var(--grey); border-radius: 30px; margin-bottom: 50px;">
+        <h2 class="section-title">Услуги</h2>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #ddd;"><span>Стрижка</span><b>500 сом</b></div>
+            <div style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #ddd;"><span>Макияж</span><b>800 сом</b></div>
+            <div style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #ddd;"><span>Ногти</span><b>900 сом</b></div>
+            <div style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #ddd;"><span>Наращивание ресниц</span><b>от 1000 сом</b></div>
+        </div>
+    </section>
+
+    <section class="container reveal" id="contacts">
+        <div class="contact-card">
+            <h2 class="section-title" style="color:white; margin-bottom:10px;">Связаться с нами</h2>
+            <p>📍 Бишкек, ТЦ “Аламидин Гранд”</p>
+            <div class="btn-group">
+                <a href="https://wa.me/996703172737" class="btn btn-wa">Написать в WhatsApp</a>
+                <a href="tel:+996703172737" class="btn btn-call">Позвонить</a>
+                <a href="https://instagram.com/salon_peri_grand" target="_blank" class="btn btn-insta full-btn">Мы в Instagram</a>
+                <a href="https://2gis.kg/bishkek/search/Аламидин%20Гранд" target="_blank" class="btn btn-2gis full-btn">Показать на карте (2ГИС)</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>PERI GRAND style</h4>
+                <p>Профессиональный салон красоты в Бишкеке. Мы создаем стиль и уверенность в себе для каждого гостя.</p>
+                <div class="social-icons">
+                    <a href="https://instagram.com/salon_peri_grand"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Insta"></a>
+                    <a href="https://wa.me/996703172737"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WA"></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Навигация</h4>
+                <a href="#masters">Наши мастера</a>
+                <a href="#about">О салоне</a>
+                <a href="#services">Услуги и цены</a>
+                <a href="#contacts">Контакты</a>
+            </div>
+            <div class="footer-section">
+                <h4>Контакты</h4>
+                <p>📞 +996 703 172 737</p>
+                <p>📍 г. Бишкек, ТЦ “Аламидин Гранд”</p>
+                <p>⏰ Режим работы: 09:00 - 20:00</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 PERI GRAND style. Все права защищены.
+        </div>
+    </footer>
+
+    <div id="mModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeM()">&times;</span>
+            <div id="modContent">
+                <img id="modImg" src="" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent);">
+                <h2 id="modName" style="margin-top:15px; text-transform: capitalize;"></h2>
+                <p id="modExp" style="color: var(--accent); font-weight: 700; margin: 10px 0;"></p>
+                <p>Мастер высочайшего класса с творческим подходом. Запишитесь и убедитесь сами!</p>
+                <br>
+                <a href="https://wa.me/996703172737" class="btn btn-wa">Записаться к мастеру</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const masters = ["aksana", "ayjamal", "ayjan", "barchin", "firuza", "kunduz", "maryam", "nurkiz", "nurzat", "perizat", "umida"];
+        const mList = document.getElementById('mList');
+
+        masters.forEach((name) => {
+            const exp = Math.floor(Math.random() * (8 - 5 + 1)) + 5; // Стаж от 5 до 8 лет
+            mList.innerHTML += `
+                <div class="master-card" onclick="openM('${name}', '5 - 8')">
+                    <img src="img/${name}.png" alt="${name}" onerror="this.src='https://via.placeholder.com/200x250?text=${name}'">
+                    <h3>${name}</h3>
+                    <span>Опыт: 5 - 8 лет</span>
+                </div>
+            `;
+        });
+
+        function openM(n, e) {
+            document.getElementById('modName').innerText = n;
+            document.getElementById('modExp').innerText = `Стаж работы: ${e} лет`;
+            document.getElementById('modImg').src = `img/${n}.png`;
+            document.getElementById('mModal').style.display = 'flex';
+        }
+
+        function closeM() { document.getElementById('mModal').style.display = 'none'; }
+
+        function reveal() {
+            let reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(r => {
+                let top = r.getBoundingClientRect().top;
+                if (top < window.innerHeight - 100) r.classList.add("active");
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        window.onload = reveal;
+    </script>
+</body>
+</html>
